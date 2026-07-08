@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crochet Gifts World</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Cozy Artisan / Craft World Palette */
+        :root {
+            --bg-cream: #FAF6F0;
+            --text-main: #4A3B32;
+            --text-muted: #7A685D;
+            --terracotta: #D9777F;
+            --terracotta-hover: #C55D65;
+            --sage-green: #88A096;
+            --warm-gold: #D4A373;
+            --card-bg: #FFFFFF;
+            --border-soft: #EAE0D5;
+            --radius: 24px;
+            --shadow-sm: 0 10px 25px rgba(74, 59, 50, 0.05);
+            --shadow-lg: 0 20px 40px rgba(74, 59, 50, 0.12);
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background-color: var(--bg-cream);
+            background-image: 
+                radial-gradient(#EAE0D5 1.5px, transparent 1.5px),
+                radial-gradient(#EAE0D5 1.5px, var(--bg-cream) 1.5px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Override */
+        h1, h2, h3, h4, .username {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-main);
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            padding: 18px 0;
+            text-align: center;
+            background-color: rgba(250, 246, 240, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--border-soft);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .top-nav a {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            padding: 8px 22px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-soft);
+            border-radius: 50px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .top-nav a:hover {
+            background-color: var(--terracotta);
+            border-color: var(--terracotta);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(217, 119, 127, 0.3);
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.8rem;
+            color: var(--terracotta);
+            cursor: pointer;
+            text-shadow: 2px 2px 0px #FFF, 4px 4px 0px var(--border-soft);
+            transition: all 0.3s ease;
+        }
+
+        header h1:hover {
+            transform: scale(1.02);
+            color: var(--terracotta-hover);
+        }
+
+        header p {
+            margin: 15px auto 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 50px;
+            border: 2px solid var(--border-soft);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Post Cards */
+        .post-card, .single-post {
+            background: var(--card-bg);
+            padding: 0;
+            margin-bottom: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 2px solid var(--border-soft);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--terracotta);
+        }
+
+        .single-post {
+            cursor: default;
+        }
+
+        .post-header {
+            padding: 22px 35px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--border-soft);
+            background: #FFFDFC;
+        }
+
+        .post-header img.avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--terracotta);
+            padding: 2px;
+            background-color: var(--bg-cream);
+            object-fit: cover;
+        }
+
+        .post-header .username {
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .post-image {
+            width: 100%;
+            display: block;
+            max-height: 520px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--border-soft);
+        }
+
+        .post-content {
+            padding: 40px 45px 30px;
+        }
+
+        .post-content h2, .post-content h1 {
+            margin: 0 0 20px;
+            font-size: 2.2rem;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        .post-content p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .post-content a {
+            color: var(--terracotta);
+            text-decoration: none;
+            border-bottom: 2px solid var(--terracotta);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .post-content a:hover {
+            color: var(--terracotta-hover);
+            border-bottom-color: var(--terracotta-hover);
+        }
+
+        .post-footer {
+            padding: 20px 45px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid var(--border-soft);
+            background: #FFFDFC;
+        }
+
+        .single-post .post-image {
+            max-height: none;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: #FFFFFF;
+            background-color: var(--terracotta);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            padding: 10px 28px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(217, 119, 127, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .back-button:hover {
+            background-color: var(--card-bg);
+            color: var(--terracotta);
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a onclick="navigate('home')">Home</a>
+        <a onclick="navigate('page', 'about')">About</a>
+        <a onclick="navigate('page', 'privacy')">Privacy Policy</a>
+        <a onclick="navigate('page', 'terms')">Terms</a>
+        <a onclick="navigate('page', 'contact')">Contact</a>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 onclick="navigate('home')">Crochet Gifts World</h1>
+            <p>Handmade inspiration, cozy patterns & craft side-hustles ✨🧶</p>
+        </div>
+    </header>
+
+    <main class="container" id="app">
+        </main>
+
+    <script>
+        // 1. Blog Posts Array
+        const posts = [
+            {
+                id: '10-profitable-crochet-items-that-sell-fast-in-2026',
+                title: '10 Profitable Crochet Items That Sell Fast in 2026',
+                date: 'January 18, 2026',
+                image: './assets/10 Profitable Crochet Items That Sell Fast in 2026.png',
+                excerpt: 'Want to turn your crochet hobby into extra income this year? 🧶✨ Discover the top 10 bestselling crochet items for 2026 that are trendy, beginner-friendly, and highly profitable! From aesthetic tote bags and cute plushies to practical laptop sleeves and headbands, these projects fly off virtual shelves.\n• Quick maker tip: Focus on items with low yarn investment and high daily utility like scrunchies and coasters for maximum profit margins!\n• Batch make smaller items in trendy seasonal color palettes to attract impulse buyers at craft fairs and online shops.\nTurn your stash into cash today—save for later! 📌 #CrochetBusiness #CraftToCash #CrochetSeller #DIYSideHustle #CrochetTrends2026',
+                content: `
+                    <p>Turning a beloved craft into a thriving creative business is a dream for many makers, and 2026 is shaping up to be an incredible year for handmade crochet goods! Consumers are increasingly turning away from mass-produced fast fashion in favor of unique, textured, and artisan-crafted items that tell a story. Whether you are preparing for local spring craft fairs, setting up an Etsy storefront, or building a brand on social media, knowing which products actually convert browsing shoppers into paying buyers is essential for your success.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+                      <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+                      <ul style="margin:0;padding-left:20px;">
+                        <li><strong>High-Daily-Utility Items Win:</strong> Products that serve a practical daily purpose—like tote bags, laptop sleeves, and coasters—have consistently higher conversion rates.</li>
+                        <li><strong>Low Investment, High Return:</strong> Small accessories such as scrunchies and headbands require minimal yarn and time, allowing for impressive profit margins when sold in bundles.</li>
+                        <li><strong>The Cottagecore Boom:</strong> Trendy bucket hats, market bags, and amigurumi plushies continue to dominate social media algorithms and attract younger demographics.</li>
+                        <li><strong>Batch Crocheting is Key:</strong> Maximize your hourly wage by prepping components in assembly-line fashion using chunky or worsted-weight yarns.</li>
+                      </ul>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">The 2026 Handmade Market Landscape</h2>
+                    <p>The handmade marketplace has evolved significantly over the last few years. Today's buyers aren't just looking for traditional doilies or heavy winter garments; they want aesthetic, functional pieces that fit seamlessly into modern lifestyles. To run a profitable crochet side hustle, you must balance three critical metrics: material cost, making time, and perceived market value.</p>
+
+                    <p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Pricing your work correctly is the foundation of a sustainable business. Never compete on price alone by undercutting mass-manufactured goods. Instead, price for your skill, quality materials, and unique design aesthetic using the formula: (Cost of Supplies + (Hours Worked × Hourly Rate)) × Markup Percentage.</p>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Top 10 Bestselling Crochet Items</h2>
+                    <p>Based on current search trends, craft fair vendor reports, and consumer purchasing habits, here are the top ten items guaranteed to fly off your display tables and virtual shelves this year.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">1. Textured Everyday Tote Bags</h3>
+                    <p>Tote bags are undisputed bestsellers because they appeal to eco-conscious shoppers and fashion lovers alike. Using sturdy cotton or linen blend yarns ensures the bag won't stretch out excessively when loaded with groceries, books, or beach essentials. Openwork mesh designs or thick, squishy granny square variations both command premium prices.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">2. Boho Mini Backpacks</h3>
+                    <p>A step up from simple totes, drawstring mini backpacks offer hands-free convenience with a distinct artisanal charm. Featuring decorative flap closures and sturdy straps, these bags are hugely popular among festival-goers and students looking for statement accessories.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">3. Floral Daisy Bucket Hats</h3>
+                    <p>Bucket hats remain a massive fashion trend in 2026. Crocheted versions adorned with 3D daisy appliques or contrasting brims bring a playful, vintage-inspired vibe that customers love to showcase on Instagram and TikTok.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">4. Heirloom Baby Blankets</h3>
+                    <p>The baby gift market is timeless and evergreen. Parents and gift-givers are always willing to invest in heirloom-quality, breathable, and hypoallergenic baby blankets. Soft shell stitches or modern waffle weaves in gender-neutral earthy tones are current top sellers.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">5. French-Style Market Bags</h3>
+                    <p>Lightweight, expandable diamond-mesh market bags are incredibly fast to whip up using minimal yardage. Roll them up neatly with a custom branded belly band for an irresistible impulse purchase at farmers' markets!</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">6. Absorbent Cotton Coasters</h3>
+                    <p>Sold in curated sets of four or six, circular or flower-shaped coasters protect furniture while adding a pop of cozy texture to coffee tables. They are one of the best ways to utilize leftover yarn scraps profitably.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">7. Amigurumi Plushies & Collectibles</h3>
+                    <p>From whimsical dressed-up bunnies to chubby woodland creatures, amigurumi plushies evoke joy and nostalgia. Using super-bulky chenille or velvet yarn cuts production time in half while creating an ultra-soft, huggable texture that customers can't resist touching.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">8. Twisted Ear Warmer Headbands</h3>
+                    <p>During autumn and winter, twisted or braided headbands are essential wardrobe staples. They offer stylish warmth without messing up hairstyles, making them a high-converting gift item during the holiday shopping rush.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">9. Ruffled Statement Scrunchies</h3>
+                    <p>Crocheted over standard elastic hair ties, ruffled scrunchies are the ultimate budget-friendly item. Display them in color-coordinated baskets near your checkout table to encourage quick add-on sales.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">10. Padded Laptop & Tablet Sleeves</h3>
+                    <p>With remote work and digital nomad lifestyles booming, protective tech accessories are in high demand. Crocheting dense, shock-absorbing stitch patterns (like the thermal stitch or moss stitch) creates functional, stylish sleeves with wooden button closures.</p>
+
+                    <p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> To stand out in a crowded market, offer complimentary personalization! Sewing on a small personalized leather tag with the customer's initials or your brand logo elevates a simple crocheted piece into a luxury artisan product.</p>
+
+                    <div style="background:#f1f5f9;border-radius:12px;padding:20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Why This Matters for Craft Sellers</h4>
+                      <p style="margin:0;color:#475569;">Focusing your product line on these verified bestsellers prevents burnout from creating complex, time-consuming garments that rarely sell at fair market prices. By curating a balanced inventory of quick-turnaround accessories and high-ticket statement bags, you create a scalable, resilient craft business capable of generating dependable side income year-round.</p>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+                    <p>Starting a profitable crochet side hustle in 2026 doesn't require thousands of dollars in upfront capital; all it takes is a hook, a curated selection of quality yarn, and a strategic understanding of what modern buyers crave. Start by mastering two or three items from this list, perfect your packaging, and share your making journey proudly with the world!</p>
+
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Quick Points at a Glance</h4>
+                      <ul style="margin:0;padding-left:20px;color:#475569;">
+                        <li>Prioritize practical daily items like totes, coasters, and tech sleeves.</li>
+                        <li>Use super-bulky yarns for amigurumi plushies to maximize size and minimize labor time.</li>
+                        <li>Bundle small items like coasters and scrunchies to increase average order value.</li>
+                        <li>Always calculate your prices based on real material costs and a fair hourly wage.</li>
+                      </ul>
+                    </div>
+
+                    <div style="margin-top:28px;">
+                      <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Crochet Business</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Craft Side Hustle</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Bestselling Crafts</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Market Bags</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Amigurumi Plushies</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">DIY Income</span>
+                    </div>
+                `
+            },
+            {
+                id: 'easy-beginner-crochet-heart-drawstring-pouch-pattern',
+                title: 'Easy Beginner Crochet Heart Drawstring Pouch Pattern',
+                date: 'February 10, 2026',
+                image: './assets/Easy Beginner Crochet Heart Drawstring Pouch Pattern.png',
+                excerpt: 'Looking for the sweetest handmade gift project? 💖 Hook up this adorable crochet heart drawstring pouch in no time! Perfect for beginners, this easy pattern uses basic stitches to create a charming, functional pouch for jewelry, earbuds, or little keepsakes.\n• Beginner tip: Count your stitches on both matching heart panels so they align perfectly when joining around the seam!\n• Lightly block your heart panels before crocheting them together for a super crisp, professional shape.\nGrab your favorite worsted weight yarn and 4.0mm hook—save for later! 🌸 #CrochetPattern #BeginnerCrochet #HeartCrochet #DIYGiftIdeas #CrochetPouch #YarnLove',
+                content: `
+                    <p>There is something undeniably magical about creating functional, heartfelt gifts from a simple ball of yarn. If you are searching for a project that is equally charming, quick to complete, and forgiving for beginners, this beginner-friendly Crochet Heart Drawstring Pouch is the absolute perfect make! Whether you want to gift jewelry, store earbuds, or organize small keepsakes in your handbag, this delightful textured heart pouch adds a touch of handmade love to everyday life.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+                      <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+                      <ul style="margin:0;padding-left:20px;">
+                        <li><strong>Beginner-Friendly Techniques:</strong> Uses foundational stitches including single crochet (sc), half double crochet (hdc), and double crochet (dc) worked in simple rounds.</li>
+                        <li><strong>Minimal Materials Required:</strong> All you need is a small amount of worsted weight cotton or acrylic yarn and a standard 4.0mm crochet hook.</li>
+                        <li><strong>Two-Panel Construction:</strong> The pouch is constructed easily by crocheting two identical heart motifs and seaming them around the sides and bottom.</li>
+                        <li><strong>Built-In Eyelet Casing:</strong> Learn how to create spacing in your top row to cleanly thread a custom drawstring cord or ribbon.</li>
+                      </ul>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Materials & Abbreviations Checklist</h2>
+                    <p>Before diving into your heart panels, gathering the right tools ensures a smooth and enjoyable crocheting session. For this pattern, medium worsted weight (#4) cotton yarn is highly recommended because it provides stitch definition, structural durability, and a clean matte finish.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Essential Tools & Supplies</h3>
+                    <ul>
+                      <li><strong>Yarn:</strong> ~50 yards of worsted weight cotton or premium acrylic yarn in dusty rose or pink.</li>
+                      <li><strong>Hook:</strong> 4.0 mm (G-6) ergonomic crochet hook.</li>
+                      <li><strong>Notions:</strong> Tapestry needle for weaving in ends, sharp scissors, and 3 stitch markers.</li>
+                      <li><strong>Drawstring:</strong> A braided cotton cord, satin ribbon, or a simple crocheted chain (approx. 14 inches long).</li>
+                    </ul>
+
+                    <p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Maintain consistent tension throughout both heart panels! If your second heart is hooked tighter or looser than your first, the edges will not align evenly during the final seaming stage. Use stitch markers at the top lobes and bottom point to keep orientation clear.</p>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Step-by-Step Construction Guide</h2>
+                    <p>Creating this gift pouch is broken down into four simple phases: crocheting the first panel, making the matching second panel, joining them together with an edging seam, and adding the functional drawstring casing.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 1: Starting the Heart Center</h3>
+                    <p>Begin by making a magic ring (or chain 4 and join with a slip stitch to form a circle). Chain 1, then work a foundational round of 12 single crochets directly into the ring. Pull the tail tight to close the center hole completely. This forms the sturdy core of your heart.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 2: Shaping the Rounded Curves</h3>
+                    <p>To create the distinctive heart silhouette, you will strategically increase stitches on opposite sides of your circle. Work clusters of double crochets and treble crochets into the upper stitches to form the rounded top lobes, while placing a single treble crochet at the very bottom center stitch to create the sharp downward point. Fasten off your first panel, then repeat the exact instructions to create a second identical panel. Do not fasten off the second panel!</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 3: Joining the Two Panels</h3>
+                    <p>Place your two heart panels wrong sides together so the beautiful textured right sides face outward. Insert your hook through both layers of the top right curve. Work single crochet stitches evenly around the sides and bottom point, joining the layers together securely. Leave the top curved dip open to serve as the pouch entrance.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step 4: Threading the Drawstring</h3>
+                    <p>Along the open top edge, work a round of alternating double crochets and chain-1 spaces to create eyelet holes. Weave your prepared cotton cord or crocheted chain in and out of the eyelets around the entire perimeter. Pull both ends gently to cinch the heart pouch closed, tying a decorative knot at the tips of your cord.</p>
+
+                    <p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> For an extra polished look, block your heart panels lightly with steam before seaming them together! Steam relaxing the fibers removes any natural curling and ensures your stitches settle into an immaculate, symmetrical shape.</p>
+
+                    <div style="background:#f1f5f9;border-radius:12px;padding:20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Why This Pattern is a Maker Favorite</h4>
+                      <p style="margin:0;color:#475569;">Unlike complex 3D bags that require sewing fabric linings or installing difficult zippers, this drawstring pouch relies entirely on clever stitch geometry. It teaches beginner crocheters essential shaping skills while yielding an immediately usable, gratifying accessory in under an hour of crafting time.</p>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+                    <p>Your beautiful crochet heart drawstring pouch is now complete and ready to gift! This versatile pattern can be adapted effortlessly—try using chunky yarn and a larger hook for a statement handbag, or crochet it in red and white cotton for Valentine's Day treats. Experiment with different colors and enjoy the art of mindful making!</p>
+
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Quick Points at a Glance</h4>
+                      <ul style="margin:0;padding-left:20px;color:#475569;">
+                        <li>Use worsted weight cotton (#4) for optimal shape retention and durability.</li>
+                        <li>Crochet two identical heart panels from the center outward in rounds.</li>
+                        <li>Seam panels together using single crochet, leaving the top opening accessible.</li>
+                        <li>Weave a cord through top eyelet spaces for an easy, pull-tight closure.</li>
+                      </ul>
+                    </div>
+
+                    <div style="margin-top:28px;">
+                      <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Beginner Crochet</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Crochet Heart Pattern</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Drawstring Pouch</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">DIY Gift Ideas</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Yarn Projects</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Quick Crochet</span>
+                    </div>
+                `
+            },
+            {
+                id: '10-cute-and-beginner-friendly-crochet-projects-you-will-love',
+                title: '10 Cute and Beginner Friendly Crochet Projects You Will Love',
+                date: 'March 22, 2026',
+                image: './assets/10 Cute and Beginner Friendly Crochet Projects You Will Love.png',
+                excerpt: 'Ready to start crocheting without feeling overwhelmed? 🌼 Discover 10 super cute, beginner-friendly crochet projects that are fun to make and actually useful! Whether you want to brighten your desk with a potted daisy, make a cheeky frog keychain, or hook an everyday flower tote bag, this list has you covered.\n• Practice basic stitches on quick wins like flower coasters and scrunchies before tackling larger projects!\n• Use stitch markers to keep track of your rounds when making amigurumi like the mini teddy bear or frog keychain.\nPick your favorite project and start hooking today—save for later! ✨ #BeginnerCrochet #CrochetProjects #CuteCrochet #CraftIdeas #AmigurumiLove #CrochetAddict',
+                content: `
+                    <p>Stepping into the colorful world of crochet is an exciting journey, but looking at complex garment patterns and intricate lace charts can sometimes feel overwhelming for new crafters. The secret to building lifelong confidence with a hook and yarn is starting with bite-sized, adorable projects that offer quick gratification! We have curated ten irresistibly cute, beginner-friendly projects that teach essential techniques while creating delightful accessories you will actually use and cherish every day.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+                      <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+                      <ul style="margin:0;padding-left:20px;">
+                        <li><strong>Skill Building Made Fun:</strong> Master magic rings, color changes, and basic shaping without the frustration of massive stitch counts.</li>
+                        <li><strong>Stash-Busting Perfection:</strong> Almost all of these ten projects can be completed using small leftover yarn scraps from your craft basket.</li>
+                        <li><strong>Functional & Aesthetic:</strong> From cozy room decor like potted daisies to practical everyday phone pouches, every item combines utility with charm.</li>
+                        <li><strong>Instant Gratification:</strong> Most projects on this list can be completed in under two hours, making them ideal for weekend crafting sessions.</li>
+                      </ul>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Start with Mini Projects?</h2>
+                    <p>When learning any new tactile skill, muscle memory develops through repetition and completion. Tackling smaller projects eliminates the "half-finished blanket syndrome" that many beginners face. By completing cute keychains, coasters, and pouches, you practice tension control, reading patterns, and finishing techniques in a stress-free environment.</p>
+
+                    <p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Never skip using stitch markers when crocheting in continuous rounds (such as for keychains or plushies)! Because there is no joined chain step to mark the beginning of a row, placing a locking stitch marker in your very first stitch prevents you from losing your place and ruining the item's proportions.</p>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">The 10 Cute Beginner Projects</h2>
+                    <p>Here is your ultimate inspiration checklist of charming, easy-to-hook projects designed to brighten your space and wardrobe.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">1. Pastel Flower Coasters</h3>
+                    <p>Small, quick, and wonderful for stitch practice! Working in flat circles teaches you the mathematics of increasing stitches evenly so your fabric lies completely flat without cupping or waving.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">2. Amigurumi Frog Keychain</h3>
+                    <p>With pink embroidered cheeks and cheerful safety eyes, a tiny sphere frog keychain introduces you to the magic ring and basic decreases (sc2tog) in the most rewarding way possible.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">3. Textured Crochet Scrunchies</h3>
+                    <p>Simply crochet single or double crochets around a standard hair elastic! Push the stitches tightly together as you work to create dramatic, fabulous ruffles that are gentle on your hair.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">4. Aesthetic Flower Tote Bag</h3>
+                    <p>Constructed by crocheting simple solid squares and sewing them together, this bag is elevated by stitching playful daisy motifs onto the front panels for a trendy cottagecore look.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">5. Mini Teddy Bear Plushie</h3>
+                    <p>A classic first amigurumi project! Learning to crochet distinct body parts (head, ears, arms, and legs) and stitch them together neatly is a milestone for every handmade toy maker.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">6. Forever Potted Daisy Plant</h3>
+                    <p>Brighten your office desk instantly with a crocheted flower pot that never needs watering! Wrap green yarn around floral wire for bendable stems crowned with cheery white and yellow petals.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">7. Buttoned Pencil Pouch</h3>
+                    <p>Crocheting a flat rectangle and folding it over creates a sturdy, useful pouch for stationery or crochet hooks. Sewing on a decorative wooden button adds artisanal texture.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">8. Crossbody Phone Pouch</h3>
+                    <p>Keep your tech secure and stylish during walks or shopping trips. This project teaches you how to crochet long, sturdy strap cords using the Romanian cord technique so they won't stretch out under weight.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">9. Puff Stitch Heart Keychain</h3>
+                    <p>Quick to make and deeply sentimental, small stuffed heart keychains are fantastic tokens of appreciation to slip into greeting cards or gift bags for friends.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">10. Trendy Striped Bucket Hat</h3>
+                    <p>Once you feel comfortable working in continuous rounds, a bucket hat is the ultimate wearable achievement! Use soft acrylic or cotton yarn in contrasting pastel stripes for maximum comfort and style.</p>
+
+                    <p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> When making items that get frequent handling like keychains and phone pouches, choose smooth, tightly spun cotton or acrylic yarns rather than loosely plied wools. This prevents pilling and keeps your stitch definition looking sharp for years!</p>
+
+                    <div style="background:#f1f5f9;border-radius:12px;padding:20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Expert Insight on Yarn Selection</h4>
+                      <p style="margin:0;color:#475569;">For absolute beginners, light-colored worsted weight yarn (like cream, baby pink, or soft sage) combined with a smooth aluminum hook is the gold standard. Dark yarns like black or navy absorb light, making it difficult to see stitch anatomy and loop structures while you are learning.</p>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+                    <p>There is no right or wrong way to begin your crochet journey—the most important step is simply choosing a project that brings a smile to your face and setting your hook in motion! Grab some colorful yarn from your local craft store, brew a cup of tea, and start hooking one of these adorable creations today.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Quick Points at a Glance</h4>
+                      <ul style="margin:0;padding-left:20px;color:#475569;">
+                        <li>Start with flat items like coasters before progressing to 3D amigurumi toys.</li>
+                        <li>Always use stitch markers when crocheting in continuous spiral rounds.</li>
+                        <li>Opt for light-colored worsted weight yarn to easily see your stitches.</li>
+                        <li>These mini projects make incredible, personalized handmade gifts for friends!</li>
+                      </ul>
+                    </div>
+
+                    <div style="margin-top:28px;">
+                      <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Cute Crochet</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Beginner Projects</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Amigurumi Love</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Flower Coasters</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">DIY Keychains</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Craft Inspiration</span>
+                    </div>
+                `
+            },
+            {
+                id: '12-thoughtful-crochet-gifts-for-book-lovers-and-readers',
+                title: '12 Thoughtful Crochet Gifts for Book Lovers and Readers',
+                date: 'April 15, 2026',
+                image: './assets/12 Thoughtful Crochet Gifts for Book Lovers and Readers.png',
+                excerpt: 'Combine your love for yarn and literature with these 12 cozy crochet gifts for book lovers! 📚☕ From adorable bookworm bookmarks and reading cat plushies to padded tablet sleeves and miniature library shelf decors, these handmade treasures are perfect for the bibliophile in your life.\n• Quick tip: Use soft cotton yarn for bookmarks and cup cozies to ensure durability and easy washing!\n• Add a sturdy button loop closure to e-reader and tablet pouches to keep screens safe during travel.\nCreate the ultimate cozy reading experience with handmade charm—save for later! 🎀 #BookLoverGifts #CrochetBookmark #CozyReading #HandmadeGifts #CrochetGeek #YarnAndBooks',
+                content: `
+                    <p>There are few pairings in life as harmonious and deeply comforting as curling up with a gripping novel, a steaming mug of hot tea, and a cozy handmade crochet accessory! For the bibliophiles and avid readers in your life, generic store-bought presents often fall short of capturing the magical intimacy of reading. Combining your crochet skills with literary themes allows you to craft extraordinary, personalized keepsakes that celebrate their favorite pastime with warmth and artistry.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+                      <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+                      <ul style="margin:0;padding-left:20px;">
+                        <li><strong>Tailored to Reading Habits:</strong> From traditional paperbacks to modern e-readers, there is a specialized crocheted gift for every style of reader.</li>
+                        <li><strong>Flat & Functional Bookmarks:</strong> Learn why Mercerized cotton and flat stitch patterns are essential to prevent damaging book bindings and spine glues.</li>
+                        <li><strong>Protective Tech Sleeves:</strong> Dense stitch patterns like the thermal stitch provide crucial padded protection for Kindles and iPads during daily commuting.</li>
+                        <li><strong>Whimsical Bookshelf Decor:</strong> Miniature book stacks and amigurumi reading pets add personalized charm to home library shelves and reading nooks.</li>
+                      </ul>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Crafting for Bibliophiles</h2>
+                    <p>When designing gifts for readers, functionality must work hand-in-hand with aesthetics. Book lovers cherish items that enhance their reading rituals—whether that means keeping their tea warm during a marathon reading session, marking their exact page without dog-earing delicate leaves, or protecting their expensive e-ink tablets from scratches in a crowded backpack.</p>
+
+                    <p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> When crocheting bookmarks that will rest between the pages of closed books, always choose thin worsted or fingering weight cotton yarn! Thick, bulky wools create uneven pressure on book spines, which can warp covers and crack delicate binding glues over time.</p>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">12 Cozy Literary Crochet Gifts</h2>
+                    <p>Here are twelve imaginative, heartwarming crochet gift ideas that will enchant any bookworm and elevate their daily reading experience.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">1. Bespectacled Bookworm Bookmark</h3>
+                    <p>An adorable green worm wearing tiny wire spectacles and holding a miniature open book! The long, flat body rests neatly between pages while the smiling amigurumi head peeks cheerfully out from the top of the novel.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">2. Heart-Embossed Coffee Cup Cozy</h3>
+                    <p>No reading session is complete without a warm beverage. A textured ribbed cup cozy featuring a crocheted heart applique keeps coffee piping hot while insulating hands from burning cups.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">3. Mini Book Stack Keychain</h3>
+                    <p>Craft three tiny colorful rectangles, bind them like hardcover books, and stack them together on a keychain loop with a dangling daisy charm. It is a miniature library you can carry anywhere!</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">4. Reading Cat Plushie on a Pillow</h3>
+                    <p>A serene white kitty amigurumi resting on a tufted green floor cushion, deeply absorbed in a tiny pink book. This makes an exceptional decorative companion for desktop reading nooks.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">5. Pressed Tulip Stem Bookmark</h3>
+                    <p>Inspired by botanicals pressed between pages, this bookmark features a flat green stem crowned with a delicate 3D pink tulip blossom that rests gracefully against the book spine.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">6. "Books Are My Therapy" Tote Charm</h3>
+                    <p>A miniature crocheted tote bag replica embroidered with bibliophile quotes. Attach it to a main library bag using a brass swivel lobster clasp to store emergency library cards or lip balm.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">7. Intricate Little Library Shelf Diorama</h3>
+                    <p>For the ambitious maker! Crochet a structural 3D shelf unit complete with colorful yarn book spines, a tiny potted trailing plant, and a miniature glowing lamp motif.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">8. Padded E-Reader / Paperback Sleeve</h3>
+                    <p>Crocheted in thick, squishy moss stitch using soft cream yarn and adorned with a dusty rose heart motif. A wooden coconut button and elastic loop secure devices safely inside.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">9. Storybook Cottage House Bookmark</h3>
+                    <p>Bring fairy tales to life with a bookmark topped by an embroidered English cottage featuring tiny lattice windows and floral window boxes.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">10. Teacup & Novel Stack Keychain</h3>
+                    <p>Nothing screams cozy like a steaming teacup resting atop a pair of classics. This intricate amigurumi keychain celebrates the universal love language of reading and tea.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">11. Tasseled Heart Corner Bookmark</h3>
+                    <p>Designed to slip snugly over the corner of a page, this openwork lace heart bookmark finished with a handmade wooden bead tassel ensures you never lose your place.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">12. Floral Tablet & E-Reader Case</h3>
+                    <p>A vibrant pink protective pouch featuring a fold-over envelope flap secured by a crocheted daisy button. Perfect for keeping screens free from dust and screen damage.</p>
+
+                    <p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> To make tech sleeves extra luxurious and protective, line the inside with a soft piece of coordinating cotton flannel or felt! A simple hand-sewn lining prevents screen scratches and stops devices from snagging on yarn stitches when slid in and out.</p>
+
+                    <div style="background:#f1f5f9;border-radius:12px;padding:20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Why Reader Gifts Are Always a Success</h4>
+                      <p style="margin:0;color:#475569;">Readers are deeply passionate about their literary hobby and love displaying their identity as book lovers. By creating gifts that celebrate reading culture—such as bookmarks, cozies, and protective sleeves—you provide meaningful, lasting items that become part of their everyday reading sanctuary.</p>
+                    </div>
+
+                    <h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+                    <p>Handmade gifts carry an emotional weight that store-bought items simply cannot replicate. By hooking one of these twelve thoughtful literary creations, you are giving the book lover in your life a warm, tangible reminder of your care every time they open their cover to read chapter one.</p>
+
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:28px 0;">
+                      <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;">Quick Points at a Glance</h4>
+                      <ul style="margin:0;padding-left:20px;color:#475569;">
+                        <li>Use lightweight Mercerized cotton for bookmarks to keep book spines flat.</li>
+                        <li>Utilize dense stitch patterns like moss stitch for protective e-reader cases.</li>
+                        <li>Add personalized elements like embroidered quotes or favorite color palettes.</li>
+                        <li>Combine a crocheted cup cozy with a real book and tea bags for the ultimate gift bundle!</li>
+                      </ul>
+                    </div>
+
+                    <div style="margin-top:28px;">
+                      <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Book Lover Gifts</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Crochet Bookmark</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">E-Reader Sleeve</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Cozy Reading</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Literary Crafts</span>
+                      <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Handmade Gifts</span>
+                    </div>
+                `
+            }
+        ];
+
+        // 2. Static Legal Pages
+        const pages = {
+            'about': {
+                title: 'About Crochet Gifts World',
+                content: `
+                    <p>Welcome to <strong>Crochet Gifts World</strong>! 🧶✨</p>
+                    <p>Our mission is to inspire makers of all skill levels to pick up a hook and yarn to create meaningful, handmade gifts and profitable side-hustle crafts. We believe that handmade gifts carry a special magic that warms the heart of both the maker and the receiver.</p>
+                    <p>Whether you are looking for quick beginner patterns, market-tested business advice for selling your crafts, or cozy inspiration for your next weekend project, we are so glad you stopped by our creative corner of the internet!</p>
+                    <p>Thank you for being part of our crafting community!</p>
+                `
+            },
+            'privacy': {
+                title: 'Privacy Policy',
+                content: `
+                    <p><strong>Last updated: May 2026</strong></p>
+                    <p>At Crochet Gifts World, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by us and how we use it.</p>
+                    
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Log Files</h3>
+                    <p>We follow a standard procedure of using log files. The information collected includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Cookies and Web Beacons</h3>
+                    <p>Like any other website, we use "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited.</p>
+
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Pinterest and Social Media</h3>
+                    <p>We may use social media features, such as the Pinterest "Save" button or Pinterest analytics tags, which may collect your IP address and which page you are visiting on our site, and may set a cookie to enable the feature to function properly. Your interactions with these features are governed by the privacy policy of the company providing it.</p>
+                `
+            },
+            'terms': {
+                title: 'Terms of Service',
+                content: `
+                    <p><strong>Effective Date: May 2026</strong></p>
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">1. Acceptance of Terms</h3>
+                    <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    
+                    <h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">2. Pattern Use & Copyright</h3>
+                    <p>All crochet patterns, tutorials, and images provided on Crochet Gifts World are protected under applicable copyrights. You are welcome to sell finished physical items made from our free patterns in small quantities, but you may not copy, distribute, or resell the written pattern instructions or images as your own.</p>
+                `
+            },
+            'contact': {
+                title: 'Contact Us',
+                content: `
+                    <p>We would love to hear from you! Whether you have a question about a crochet pattern, need assistance with stitch tutorials, or want to collaborate with Crochet Gifts World, feel free to reach out.</p>
+                    <p><strong>Email:</strong> <a href="mailto:hello@crochetgiftsworld.com">hello@crochetgiftsworld.com</a></p>
+                    <p>We aim to respond to all maker inquiries within 48 hours. Happy hooking! 🧶</p>
+                `
+            }
+        };
+
+        // 3. Application Logic
+        const app = document.getElementById('app');
+        const blogUsername = "Crochet Gifts World";
+        const avatarUrl = "https://via.placeholder.com/100x100/D9777F/FFFFFF?text=CGW"; // Cozy brand placeholder
+
+        // Render Home (List of Posts)
+        function renderHome() {
+            let html = '';
+            posts.forEach(post => {
+                html += `
+                    <div class="post-card" onclick="navigate('post', '${post.id}')">
+                        <div class="post-header">
+                            <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                            <span class="username">${blogUsername}</span>
+                        </div>
+                        <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/720x480/FAF6F0/D9777F?text=Crochet+Gifts+World+Pin'">
+                        <div class="post-content">
+                            <h2>${post.title}</h2>
+                            <p style="white-space: pre-line;">${post.excerpt}</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>${post.date}</span>
+                            <span style="letter-spacing: 8px; font-size: 1.2rem; color: var(--terracotta);">📌 ♥</span>
+                        </div>
+                    </div>
+                `;
+            });
+            app.innerHTML = html;
+        }
+
+        // Render Static Page
+        function renderPage(pageId) {
+            const page = pages[pageId];
+
+            if (!page) {
+                app.innerHTML = `<p style="color: var(--text-main);">Page not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Inspiration</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Inspiration</a>
+                <div class="single-post">
+                    <div class="post-content" style="padding-top: 35px; padding-bottom: 35px;">
+                        <h1>${page.title}</h1>
+                        ${page.content}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // Render Single Post
+        function renderPost(postId) {
+            const post = posts.find(p => p.id === postId);
+
+            if (!post) {
+                app.innerHTML = `<p style="color: var(--text-main);">Post not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Inspiration</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Inspiration</a>
+                <div class="single-post">
+                    <div class="post-header">
+                        <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                        <span class="username">${blogUsername}</span>
+                    </div>
+                    <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/720x480/FAF6F0/D9777F?text=Crochet+Gifts+World+Pin'">
+                    <div class="post-content">
+                        <h1>${post.title}</h1>
+                        ${post.content}
+                    </div>
+                    <div class="post-footer">
+                        <span>${post.date}</span>
+                        <span style="letter-spacing: 8px; font-size: 1.2rem; color: var(--terracotta);">📌 ♥</span>
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // Router / Navigator
+        function navigate(view, id = null) {
+            if (view === 'home') {
+                window.location.hash = '';
+                renderHome();
+            } else if (view === 'post') {
+                window.location.hash = id;
+                renderPost(id);
+            } else if (view === 'page') {
+                window.location.hash = id;
+                renderPage(id);
+            }
+        }
+
+        // Listen for browser navigation (back/forward)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                if (pages[hash]) {
+                    renderPage(hash);
+                } else {
+                    renderPost(hash);
+                }
+            } else {
+                renderHome();
+            }
+        });
+
+        // Initial Load
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) {
+            if (pages[initialHash]) {
+                renderPage(initialHash);
+            } else {
+                renderPost(initialHash);
+            }
+        } else {
+            renderHome();
+        }
+    </script>
+</body>
+
+</html>
